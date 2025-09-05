@@ -5,4 +5,6 @@
     <color name="primaryColor">#2F7E79</color>
     <color name="startColor">#63B5AF</color>
     <color name="endColor">#438883</color>
+    <color name="shadowColor">#3E7C78</color>
+    <color name="lightWight">#4DFFFFFF</color>
 </resources>

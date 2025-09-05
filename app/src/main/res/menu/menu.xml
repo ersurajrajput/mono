@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/Home" android:icon="@drawable/icon_home"   android:id="@+id/homeFragment"/>
+    <item android:title="@string/Statistic" android:icon="@drawable/icon_stats"   android:id="@+id/statisticFragment"/>
+    <item android:title="@string/AddExpense" android:icon="@drawable/icon_plus" android:id="@+id/addExpenseFragment" />
+    <item android:title="@string/Wallet" android:icon="@drawable/icon_wallet"  android:id="@+id/walletFragment"/>
+    <item android:title="@string/Profile" android:icon="@drawable/icon_user"        android:id="@+id/profileFragment"/>
+</menu>

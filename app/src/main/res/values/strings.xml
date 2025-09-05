@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">mono</string>
+    <string name="SpendSmarterSaveMore">Spend Smarter \nSave More</string>
+    <string name="AlreadyHaveAccount">Already have account?</string>
+    <string name="Login">Login</string>
+    <string name="GetStarted">Get Started</string>
+    <!--    menu items-->
+    <string name="Home">Home</string>
+    <string name="Statistic">Statistic</string>
+    <string name="AddExpense">Add Expense</string>
+    <string name="Wallet">Wallet</string>
+    <string name="Profile">Profile</string>
+    <string name="greetings">Good Morning</string>
+    <string name="dollar">$</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
