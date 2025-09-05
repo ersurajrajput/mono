@@ -1,60 +1,164 @@
 package com.ersurajrajput.mono.ui.fragments
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.ersurajrajput.mono.R
+import com.ersurajrajput.mono.adapters.TransactionAdapter
+import com.ersurajrajput.mono.databinding.FragmentStatisticBinding
+import com.ersurajrajput.mono.models.TransactionsModel
+import com.github.mikephil.charting.components.MarkerView
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.utils.MPPointF
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [StatisticFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StatisticFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private lateinit var binding: FragmentStatisticBinding
+    private lateinit var tListOriginal: ArrayList<TransactionsModel>
+    private lateinit var tListFiltered: ArrayList<TransactionsModel>
+    private lateinit var transactionAdapter: TransactionAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false)
+        binding = FragmentStatisticBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //init
+        tListOriginal = ArrayList()
+        tListFiltered = ArrayList()
+
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+
+        tListFiltered.addAll(tListOriginal)
+
+        transactionAdapter = TransactionAdapter(requireContext(),tListFiltered)
+        binding.transactionsRecyclerView.adapter = transactionAdapter
+
+
+
+
+
+
+
+
+
+//        showChart(requireContext())
+
+
+        //initialize
+        val list = arrayListOf("Expenses", "Income","All")
+        // Use simple_dropdown_item_1line, not simple_list_item_1
+        val adapter = ArrayAdapter(
+            requireContext(), android.R.layout.simple_dropdown_item_1line, list
+        )
+
+        // Set adapter to AutoCompleteTextView
+        binding.AutoCompleteView.setAdapter(adapter)
+
+        // Make sure the dropdown shows when clicked
+        binding.AutoCompleteView.setOnClickListener {
+            binding.AutoCompleteView.showDropDown()
+        }
+
+        binding.AutoCompleteView.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+               var current = s.toString()
+                if (current == "Expenses"){
+                    tListFiltered.clear()
+                    tListFiltered.addAll(tListOriginal.filter { it.tType=="d" })
+                    transactionAdapter.notifyDataSetChanged()
+
+                }else if (current=="Income"){
+                    tListFiltered.clear()
+                    tListFiltered.addAll(tListOriginal.filter { it.tType=="c" })
+                    transactionAdapter.notifyDataSetChanged()
+                }else if (current=="All"){
+                    tListFiltered.clear()
+                    tListFiltered.addAll(tListOriginal)
+                    transactionAdapter.notifyDataSetChanged()
+                }
+            }
+
+        })
+
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatisticFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatisticFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
     }
+
+//    private fun showChart(context: Context){
+//        val entries = ArrayList<Entry>()
+////        entries.add(Entry(, 500f))
+//        entries.add(Entry(1f, 800f))
+//        entries.add(Entry(2f, 600f))
+//        entries.add(Entry(3f, 900f))
+//        entries.add(Entry(4f, 700f))
+//
+//        // Simple LineDataSet
+//        val dataSet = LineDataSet(entries, "Earnings")
+////        dataSet.color = Color.BLUE
+////        dataSet.setDrawCircles(true)
+////        dataSet.circleRadius = 5f
+////        dataSet.setDrawValues(false)
+////        dataSet.lineWidth = 2f
+//
+//        // Set data to chart
+//        val lineData = LineData(dataSet)
+//        binding.lineChart.data = lineData
+//
+//        // Chart customization
+////        binding.lineChart.axisRight.isEnabled = false // remove right Y-axis
+////        binding.lineChart.description.isEnabled = false // remove description
+////        binding.lineChart.legend.isEnabled = false // remove legend
+//
+//        binding.lineChart.invalidate() // refresh chart
+//
+//    }
 }

@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.bouncycastle.oer.its.etsi102941.Url
+
 pluginManagement {
     repositories {
         google {
@@ -9,6 +11,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven("https://jitpack.io") // Add JitPack here
     }
 }
 dependencyResolutionManagement {
@@ -16,6 +19,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io") // Add JitPack here
     }
 }
 

@@ -6,55 +6,70 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ersurajrajput.mono.R
+import com.ersurajrajput.mono.adapters.TransactionAdapter
+import com.ersurajrajput.mono.adapters.TransferAdapter
+import com.ersurajrajput.mono.databinding.FragmentHomeBinding
+import com.ersurajrajput.mono.models.TransactionsModel
+import com.ersurajrajput.mono.models.TransferModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var transactionsList: ArrayList<TransactionsModel>
+    private lateinit var transfersList: ArrayList<TransferModel>
+    private lateinit var transactionAdapter: TransactionAdapter
+    private lateinit var transferAdapter: TransferAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+          binding = FragmentHomeBinding.inflate(inflater,container,false)
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //init
+        transfersList = ArrayList()
+        transactionsList = ArrayList()
+
+        // prepare data
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        transactionsList.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+
+
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+        transfersList.add(TransferModel(tName = "Suraj", tImg = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"))
+
+        // prepare adapter
+        transactionAdapter = TransactionAdapter(requireContext(),transactionsList)
+        binding.transactionsRecyclerView.adapter = transactionAdapter
+
+
+        transferAdapter = TransferAdapter(requireContext(),transfersList)
+        binding.transfersRecyclerView.adapter = transferAdapter
+
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
     }
 }

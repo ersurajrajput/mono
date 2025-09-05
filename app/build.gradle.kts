@@ -49,7 +49,14 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //glide
+    implementation("com.github.bumptech.glide:glide:5.0.4")
+
+    //graph
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
