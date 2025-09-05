@@ -44,23 +44,10 @@ class StatisticFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //init
-        tListOriginal = ArrayList()
-        tListFiltered = ArrayList()
 
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-
-        tListFiltered.addAll(tListOriginal)
-
-        transactionAdapter = TransactionAdapter(requireContext(),tListFiltered)
-        binding.transactionsRecyclerView.adapter = transactionAdapter
+        DataSetup()
+        dropDownSetup()
+        filterSetup()
 
 
 
@@ -69,25 +56,18 @@ class StatisticFragment : Fragment() {
 
 
 
-
-//        showChart(requireContext())
-
-
-        //initialize
-        val list = arrayListOf("Expenses", "Income","All")
-        // Use simple_dropdown_item_1line, not simple_list_item_1
-        val adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_dropdown_item_1line, list
-        )
-
-        // Set adapter to AutoCompleteTextView
-        binding.AutoCompleteView.setAdapter(adapter)
 
         // Make sure the dropdown shows when clicked
-        binding.AutoCompleteView.setOnClickListener {
-            binding.AutoCompleteView.showDropDown()
-        }
 
+
+
+
+    }
+
+    companion object {
+
+    }
+    private fun filterSetup(){
         binding.AutoCompleteView.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
 
@@ -108,7 +88,7 @@ class StatisticFragment : Fragment() {
                 before: Int,
                 count: Int
             ) {
-               var current = s.toString()
+                var current = s.toString()
                 if (current == "Expenses"){
                     tListFiltered.clear()
                     tListFiltered.addAll(tListOriginal.filter { it.tType=="d" })
@@ -126,12 +106,43 @@ class StatisticFragment : Fragment() {
             }
 
         })
+    }
+    private fun dropDownSetup(){
+        val list = arrayListOf( "All","Expenses","Income")
+        // Use simple_dropdown_item_1line, not simple_list_item_1
+        val adapter = ArrayAdapter(
+            requireContext(), android.R.layout.simple_dropdown_item_1line, list
+        )
+
+        // Set adapter to AutoCompleteTextView
+        binding.AutoCompleteView.setAdapter(adapter)
+        binding.AutoCompleteView.setOnClickListener {
+            binding.AutoCompleteView.showDropDown()
+        }
+    }
+
+    private fun DataSetup(){
+        //init
+        tListOriginal = ArrayList()
+        tListFiltered = ArrayList()
+
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+
+        tListFiltered.addAll(tListOriginal)
+
+        transactionAdapter = TransactionAdapter(requireContext(),tListFiltered)
+        binding.transactionsRecyclerView.adapter = transactionAdapter
 
     }
 
-    companion object {
 
-    }
 
 //    private fun showChart(context: Context){
 //        val entries = ArrayList<Entry>()

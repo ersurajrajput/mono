@@ -124,7 +124,7 @@
                 android:layout_marginTop="0dp"
                 android:inputType="none"
                 android:paddingStart="20dp"
-                android:text="Expenses" />
+                android:text="All" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
