@@ -45,6 +45,7 @@ class AddExpenseFragment : Fragment() {
             if (!inputChacke()){
                 return@setOnClickListener
             }
+            saveItem()
             Log.d("myTag",transactionsModel.toString())
         }
     }
@@ -102,6 +103,11 @@ class AddExpenseFragment : Fragment() {
 
     }
     private fun saveItem(){
+        if (::transactionsModel.isInitialized){
+            showError(transactionsModel.toString())
+        }else{
+            showError("Item Not Initialized")
+        }
 
     }
     private fun showError(error: String){

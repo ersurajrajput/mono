@@ -73,16 +73,20 @@
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@android:color/white"
                 app:tabTextColor="@android:color/darker_gray">
-
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All" />
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Day" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Week" />
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:id="@+id/week"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Week" />-->
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
