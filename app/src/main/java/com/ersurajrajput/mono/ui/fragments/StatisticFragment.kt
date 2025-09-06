@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.ersurajrajput.mono.R
 import com.ersurajrajput.mono.adapters.TransactionAdapter
 import com.ersurajrajput.mono.databinding.FragmentStatisticBinding
@@ -56,6 +57,10 @@ class StatisticFragment : Fragment() {
         dropDownSetup()
         filterSetup()
 
+
+        binding.ivBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
 
 
 
@@ -218,16 +223,29 @@ class StatisticFragment : Fragment() {
         //init
         tListOriginal = ArrayList()
         tListFiltered = ArrayList()
+        var img = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"
+        tListOriginal.add(TransactionsModel(tName = "Salary", tAmount = 50000.0, tDay = "1", tMonth = "9", tYear = "2025", tDate = "01/09/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Netflix", tAmount = 499.0, tDay = "2", tMonth = "9", tYear = "2025", tDate = "02/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Zomato", tAmount = 250.0, tDay = "2", tMonth = "9", tYear = "2025", tDate = "02/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Petrol", tAmount = 1200.0, tDay = "3", tMonth = "9", tYear = "2025", tDate = "03/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Freelance Project", tAmount = 15000.0, tDay = "5", tMonth = "9", tYear = "2025", tDate = "05/09/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Swiggy", tAmount = 350.0, tDay = "6", tMonth = "9", tYear = "2025", tDate = "06/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Electricity Bill", tAmount = 1800.0, tDay = "7", tMonth = "9", tYear = "2025", tDate = "07/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Youtube Premium", tAmount = 129.0, tDay = "7", tMonth = "9", tYear = "2025", tDate = "07/09/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Part-time Job", tAmount = 8000.0, tDay = "8", tMonth = "9", tYear = "2025", tDate = "08/09/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Groceries", tAmount = 2200.0, tDay = "9", tMonth = "9", tYear = "2025", tDate = "09/09/2025", tType = "d", tImg = img))
 
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "1", tMonth = "1", tYear = "2025", tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "1", tMonth = "1", tYear = "2025", tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "2", tMonth = "2", tYear = "2025", tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "6", tMonth = "9", tYear = "2025", tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "6", tMonth = "9", tYear = "2025", tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "1", tMonth = "9", tYear = "2025", tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "1", tMonth = "1", tYear = "2024", tDate = "12/04/2025", tType = "d", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
-        tListOriginal.add(TransactionsModel(tName = "Youtube", tAmount = 12.1, tDay = "1", tMonth = "1", tYear = "2024", tDate = "12/04/2025", tType = "c", tImg = "https://img.favpng.com/10/23/11/youtube-portable-network-graphics-logo-image-computer-icons-png-favpng-5k5DNc5DBpxFXsqScWJ07n9iV.jpg"))
+        tListOriginal.add(TransactionsModel(tName = "Amazon Shopping", tAmount = 3500.0, tDay = "10", tMonth = "8", tYear = "2025", tDate = "10/08/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Dividends", tAmount = 2000.0, tDay = "15", tMonth = "8", tYear = "2025", tDate = "15/08/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Phone Recharge", tAmount = 249.0, tDay = "20", tMonth = "8", tYear = "2025", tDate = "20/08/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Swiggy", tAmount = 450.0, tDay = "22", tMonth = "8", tYear = "2025", tDate = "22/08/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Internet Bill", tAmount = 999.0, tDay = "25", tMonth = "8", tYear = "2025", tDate = "25/08/2025", tType = "d", tImg = img))
 
+        tListOriginal.add(TransactionsModel(tName = "Petrol", tAmount = 1000.0, tDay = "5", tMonth = "7", tYear = "2025", tDate = "05/07/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Salary", tAmount = 48000.0, tDay = "1", tMonth = "7", tYear = "2025", tDate = "01/07/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Zomato", tAmount = 300.0, tDay = "8", tMonth = "7", tYear = "2025", tDate = "08/07/2025", tType = "d", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Freelance", tAmount = 12000.0, tDay = "15", tMonth = "7", tYear = "2025", tDate = "15/07/2025", tType = "c", tImg = img))
+        tListOriginal.add(TransactionsModel(tName = "Amazon Shopping", tAmount = 2700.0, tDay = "20", tMonth = "7", tYear = "2025", tDate = "20/07/2025", tType = "d", tImg = img))
         tListFiltered.addAll(tListOriginal)
 
         transactionAdapter = TransactionAdapter(requireContext(),tListFiltered)

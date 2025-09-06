@@ -66,6 +66,7 @@ class TransactionAdapter(var context: Context,var tList: ArrayList<TransactionsM
 
         holder.tname.text = tList[position].tName
         holder.tAmount.text = tList[position].tAmount.toString()
+        holder.tDate.text = tList[position].tDate.toString()
         Glide.with(context).load(tList[position].tImg).placeholder(R.drawable.ic_launcher_background).into(holder.tImg)
 
         if (tList[position].tType == "c"){
@@ -78,6 +79,8 @@ class TransactionAdapter(var context: Context,var tList: ArrayList<TransactionsM
             holder.dSymbol.setTextColor(ContextCompat.getColor(context,R.color.red))
             holder.tSymbol.setTextColor(ContextCompat.getColor(context,R.color.red))
             holder.tAmount.setTextColor(ContextCompat.getColor(context,R.color.red))
+
+
 
             holder.tSymbol.text = "-"
         }
