@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/icon_man" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/btnGetStarted"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_primary"
@@ -60,10 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/AlreadyHaveAccount"
-            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/btnGetStarted"
             app:layout_constraintHorizontal_bias="0.412"
-            app:layout_constraintStart_toStartOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintStart_toStartOf="@+id/btnGetStarted"
+            app:layout_constraintTop_toBottomOf="@+id/btnGetStarted" />
 
         <TextView
             android:id="@+id/textView4"
@@ -75,7 +75,7 @@
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/btnGetStarted" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

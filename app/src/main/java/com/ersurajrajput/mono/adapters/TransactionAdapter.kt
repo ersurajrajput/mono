@@ -1,7 +1,9 @@
 package com.ersurajrajput.mono.adapters
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -34,7 +36,11 @@ class TransactionAdapter(var context: Context,var tList: ArrayList<TransactionsM
             holder.tDate.setTextColor(ContextCompat.getColor(context,R.color.white))
             holder.tname.setTextColor(ContextCompat.getColor(context,R.color.white))
         }else{
-            holder.itemView.background.setTint(ContextCompat.getColor(context,R.color.white))
+            val typedValue = TypedValue()
+            val theme = context.theme
+            theme.resolveAttribute(android.R.attr.colorBackground, typedValue, true)
+            val color = typedValue.data
+            holder.itemView.background.setTint(color)
 
             // Reset colors based on type
             if (item.tType == "c") {
@@ -46,8 +52,16 @@ class TransactionAdapter(var context: Context,var tList: ArrayList<TransactionsM
                 holder.dSymbol.setTextColor(ContextCompat.getColor(context, R.color.red))
                 holder.tAmount.setTextColor(ContextCompat.getColor(context, R.color.red))
             }
-            holder.tname.setTextColor(Color.BLACK)
-            holder.tDate.setTextColor(Color.GRAY)
+            val nightModeFlags = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            val isDarkTheme = nightModeFlags == Configuration.UI_MODE_NIGHT_YES
+
+            if (isDarkTheme) {
+                holder.tname.setTextColor(Color.WHITE)
+                holder.tDate.setTextColor(Color.LTGRAY)
+            } else {
+                holder.tname.setTextColor(Color.BLACK)
+                holder.tDate.setTextColor(Color.DKGRAY)
+            }
         }
 
         holder.tname.text = tList[position].tName

@@ -1,60 +1,115 @@
 package com.ersurajrajput.mono.ui.fragments
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.DatePicker
+import androidx.appcompat.app.AlertDialog
 import com.ersurajrajput.mono.R
+import com.ersurajrajput.mono.databinding.FragmentAddExpenseBinding
+import com.ersurajrajput.mono.models.TransactionsModel
+import com.ersurajrajput.mono.models.TransferModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddExpenseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddExpenseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+  private lateinit var binding: FragmentAddExpenseBinding
+  private lateinit var transactionsModel: TransactionsModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_expense, container, false)
+        binding = FragmentAddExpenseBinding.inflate(layoutInflater,container,false)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddExpenseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddExpenseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //init
+        populateLabel()
+        populateDate()
+
+        binding.btnSave.setOnClickListener {
+            if (!inputChacke()){
+                return@setOnClickListener
             }
+            Log.d("myTag",transactionsModel.toString())
+        }
+    }
+
+    private fun populateLabel(){
+        var lableList = arrayListOf(
+            "Food & Dining",
+            "Transport",
+            "Shopping",
+            "Entertainment",
+            "Bills & Utilities",
+            "Health & Fitness",
+            "Education",
+            "Travel",
+            "Rent & Housing",
+            "Miscellaneous"
+        )
+
+        var adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,lableList)
+        binding.labelAutoTextComplete.setAdapter(adapter)
+
+        binding.labelAutoTextComplete.setOnClickListener {
+            binding.labelAutoTextComplete.showDropDown()
+        }
+
+    }
+    private fun inputChacke(): Boolean{
+        var name = binding.etName.text.toString().trim()
+        var lable = binding.labelAutoTextComplete.text.toString().trim()
+        var date = binding.etDate.text.toString().trim()
+        var amount = binding.etAmount.text.toString().trim()
+        if (name.isEmpty() || lable.isEmpty() || date.isEmpty() || amount.isEmpty()){
+            showError("All Fields Are Required")
+            return false
+        }
+        transactionsModel = TransactionsModel(tName = name, tLabel = lable, tDate = date, tAmount = amount.toDouble())
+        return true
+
+    }
+    private fun populateDate(){
+        binding.etDate.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                val date = "${selectedDay}/${selectedMonth + 1}/${selectedYear}" // Month is 0-based
+                binding.etDate.setText(date)
+            }, year, month, day)
+
+            datePicker.show()
+
+        }
+
+    }
+    private fun saveItem(){
+
+    }
+    private fun showError(error: String){
+        AlertDialog.Builder(requireContext()).setTitle("Error").setMessage(error).setPositiveButton("Retry"){dialog, which ->
+            dialog.dismiss()
+        }.show()
+    }
+    companion object {
+
     }
 }

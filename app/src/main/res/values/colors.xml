@@ -10,4 +10,5 @@
     <color name="shadowColor">#3E7C78</color>
     <color name="lightWight">#4DFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="outline">#DDDDDD</color>
 </resources>
