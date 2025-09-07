@@ -11,4 +11,6 @@
     <color name="lightWight">#4DFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="outline">#DDDDDD</color>
+    <color name="lightBright">#F4F6F6</color>
+    <color name="lightGreen">#438883</color>
 </resources>
