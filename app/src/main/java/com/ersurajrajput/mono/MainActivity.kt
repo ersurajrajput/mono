@@ -12,28 +12,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ersurajrajput.mono.api.TweetsyAPI
-import com.ersurajrajput.mono.data.model.TweetModel
-import com.ersurajrajput.mono.ui.theme.MONOTheme
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@AndroidEntryPoint
+import com.ersurajrajput.mono.ui.theme.MONOTheme
+
+
+
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var tweetsyAPI: TweetsyAPI
-    lateinit var tweetList: List<TweetModel>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
-        GlobalScope.launch {
-            Thread.sleep(5000)
-            tweetList = tweetsyAPI.getTweets().body()!!
-            showList(tweetList)
-        }
+
         setContent {
             MONOTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -63,11 +53,5 @@ fun GreetingPreview() {
 
 
         Greeting("Android")
-    }
-}
-fun showList(tweetList: List<TweetModel>){
-    for (tweet in tweetList){
-        Log.d("MyTag","cat: ${tweet.category}\nText: ${tweet.text}")
-
     }
 }
