@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnBoardingActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+<ImageView
+    android:id="@+id/iv_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/vector_bg"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:contentDescription="@string/img"
+    android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/iv_boy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img"
+        android:src="@drawable/boy"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg"
+        app:layout_constraintEnd_toEndOf="@id/iv_bg"
+        app:layout_constraintStart_toStartOf="@id/iv_bg"
+        app:layout_constraintTop_toTopOf="@id/iv_bg" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inte"
+        android:text="@string/spendSmarterSaveMore"
+        android:textAlignment="center"
+        android:textColor="@color/darkGreen"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/iv_bg"
+        app:layout_constraintStart_toStartOf="@id/iv_bg"
+        app:layout_constraintTop_toBottomOf="@id/iv_bg" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:src="@drawable/vector_coin"
+        android:contentDescription="@string/img"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_boy"
+        app:layout_constraintStart_toStartOf="@+id/iv_boy"
+        app:layout_constraintTop_toTopOf="@+id/iv_boy"
+        app:layout_constraintVertical_bias="0.048" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:src="@drawable/vector_donut"
+        android:contentDescription="@string/img"
+        app:layout_constraintBottom_toBottomOf="@id/iv_boy"
+        app:layout_constraintEnd_toEndOf="@+id/iv_boy"
+        app:layout_constraintTop_toTopOf="@id/iv_boy"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGetStarted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_btn_primary"
+        android:padding="20dp"
+        android:text="@string/getStarted"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/btnGetStarted"
+    app:layout_constraintStart_toStartOf="@id/btnGetStarted"
+    app:layout_constraintEnd_toEndOf="@id/btnGetStarted"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alreadyHaveAccount"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/darkGreen"
+        android:text="@string/login"/>
+</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
